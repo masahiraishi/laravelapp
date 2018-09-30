@@ -1,3 +1,32 @@
+
+
+@extends('layouts.helloapp')
+
+@section('title',Index)
+
+@section('menubar')
+@parent
+	インデックスページ
+@endsection
+
+@section('content')
+<p>ここが本文のコンテンツです</p>
+<P>必要な記述できます</P>
+@endsection
+
+@section('footer')
+copylight 2017
+@endsection
+
+
+
+
+
+
+
+
+
+
 <html>
 <head>
 	<title>Hello/Index</title>
@@ -9,11 +38,17 @@
 </head>
 <body>
 	<h1>Blade/Index</h1>
-	<p>{{$msg}}</p>
-	<form method="POST" action="/hello">
-		{{csrf_field()}}
-		<input type="text" name="msg">
-		<input type="submit">
-	</form>
+	<p>&#064;foreach ディレクティブの例</p>
+	<ol>
+	@php
+	$counter = 0;
+	@endphp
+	@while ($counter< count($data))
+	<li>{{$data[$counter]}}</li>
+	@php
+	$couunter++;
+	@endphp
+	@endwhile
+	</ol>
 </body>
 </html>
