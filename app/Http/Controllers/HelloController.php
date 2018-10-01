@@ -10,7 +10,11 @@ class HelloController extends Controller
 {
 	public function index (){
 
-		$data = ['one','two','three','four','five'];
+		$data = [
+				['name'=>'山田太郎','mail'=>'taro@yamada'],
+				['name'=>'田中花子','mail'=>'hanako@flower'],
+				['name'=>'すずきさちこ','mail'=>'sachico@happy']
+		];
 		return view('hello.index',['data'=>$data]);
 
 	}
