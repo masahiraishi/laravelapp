@@ -1,16 +1,16 @@
 
 @extends('layouts.helloapp')
 
-@section('title',Index)
+@section('title','Index')
 
 @section('menubar')
-@parent
+	@parent
 	インデックスページ
 @endsection
 
 @section('content')
-<p>ここが本文のコンテンツです</p>
-<P>必要な記述できます</P>
+	<p>ここが本文のコンテンツです</p>
+	<P>必要な記述できます</P>
 @endsection
 
 @section('footer')
