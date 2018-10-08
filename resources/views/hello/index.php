@@ -6,8 +6,6 @@
 		h1 {font-size:100px; text-align:right; color:#f6f6f6;
 			margin:-50px -px -100px 0px;}
 		</style>
-
-
 	</head>
 	<body>
 		<h1>Index</h1>
