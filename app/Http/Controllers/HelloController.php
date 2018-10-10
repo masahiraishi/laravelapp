@@ -31,7 +31,7 @@ class HelloController extends Controller
         $rules = [
             'name'=>'required',
             'mail'=>'email',
-            'age'=>'numerilc|between:0,150',
+            'age'=>'numeric|between:0,150',
         ];
 
         $message = [
