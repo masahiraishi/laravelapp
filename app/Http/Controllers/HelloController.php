@@ -31,14 +31,14 @@ class HelloController extends Controller
         $rules = [
             'name'=>'required',
             'mail'=>'email',
-            'age'=>'numeric|between:0,150',
+            'age'=>'numeric',
         ];
 
         $message = [
-            'name.required'=>'舐めは必ず入力して下さい',
+            'name.required'=>'名前は必ず入力して下さい',
             'mail.email'=>'メールアドレスが必要です',
             'age.numeric'=>'年齢を整数で記入してください',
-            'age.between'=>'年齢は0~150の間で入力してください',
+            'age.min'=>'年齢は0~150の間で入力してください',
         ];
 
         $validator = Validator::make($request->all(),$rules,
