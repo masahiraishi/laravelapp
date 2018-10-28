@@ -20,11 +20,10 @@ class PersonController extends Controller
 
     public function search(Request $request)
     {
-        $item  = Person::find($request->input);
-        $param = ['input' => $request->input,'item'=>$item];
+        $item  = Person::where('name',$request->input)
+            ->first();
+        $param = ['input' =>$request->input,'item'=>$item];
         return view('person.find',$param);
     }
-
-
 
 }
