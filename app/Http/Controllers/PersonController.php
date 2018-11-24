@@ -29,4 +29,38 @@ class PersonController extends Controller
         return view('person.find',$param);
     }
 
+    public function add(Request $request)
+    {
+        return view('person.add');
+    }
+
+    public function create(Request $request)
+    {
+//        バリデーションの実行
+        $this->validate($request,Person::$rules);
+//        インスタンスの生成
+        $person = new Person;
+//        値の用意
+        $form = $request->all();
+        unset($form['_token']);
+//        インスタンスに値を保存
+        $person->fill($form)->save();
+        return redirect('/person');
+    }
+
+    public function edit(Request $request)
+    {
+//        idを介してformに設定
+        $person = Person::find($request->id);
+        return view('person.edit',['form' =>$person]);
+    }
+
+    public function update(Request $request){
+        $this->validate($request,Person::$rules);
+        $person = Person::find($request->id);
+        $form = $request->all();
+        unset($form['_toekn']);
+        $person->fill($form)->save();
+        return redirect('/person');
+    }
 }
