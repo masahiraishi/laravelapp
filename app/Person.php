@@ -8,7 +8,13 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Person extends Model
 {
+    public function boards()
+    {
+        return $this->hasMany('App\Board');
+    }
+
     protected $guarded = array('id');
+
     public static $rules = array(
       'name' =>'required',
         'mail' =>'email',
@@ -43,7 +49,15 @@ class Person extends Model
      static::addGlobalScope(new ScopePerson);
     }
 
+
 }
+
+
+
+
+
+
+
 
 
 
