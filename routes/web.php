@@ -15,9 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
- // use app\Http\Middleware\HelloMiddleware;
+//  use app\Http\Middleware\HelloMiddleware;
 
-Route::get('hello','HelloController@index');
+Route::get('hello','HelloController@index')->middleware('auth');
 Route::post('hello','HelloController@post');
 Route::get('hello/add','HelloController@add');
 Route::post('hello/add','HelloController@create');
@@ -29,6 +29,8 @@ Route::post('hello/del','HelloController@remove');
 Route::get('hello/show','HelloController@show');
 Route::get('hello/session','HelloController@ses_get');
 Route::post('hello/session','HelloController@ses_put');
+Route::get('hello/auth', 'HelloController@getAuth');
+Route::post('hello/auth', 'HelloController@postAuth');
 
 
 Route::get('person','PersonController@index');
@@ -36,10 +38,8 @@ Route::get('person/find','PersonController@find');
 Route::post('person/find','PersonController@search');
 Route::get('person/add','PersonController@add');
 Route::post('person/add','PersonController@create');
-
 Route::get('person/edit','PersonController@edit');
 Route::post('person/edit','PersonController@update');
-
 Route::get('person/del','PersonController@delete');
 Route::post('person/del','PersonController@remove');
 
@@ -49,3 +49,7 @@ Route::post('board/add','BoardController@create');
 
 Route::resource('rest','RestappController');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -7,17 +7,27 @@ use Illuminate\Http\Response;
 use App\Http\Requests\HelloRequest;
 use Validator;
 use Illuminate\Support\Facades\DB;
+use App\Person;
+use Illuminate\Support\Facades\Auth;
 
 class HelloController extends Controller
 {
 	public function index (Request $request)
     {
 
-        $items = DB::table('people')
-            ->orderBy('age','asc')
-            ->get();
+//        $items = DB::table('people')->simplePaginate(5);
+//       モデル作成
+//        $items = Person::simplePaginate(5);
+//        DBクラス利用で順番変更
+//      s$items = DB::table('person')->orderBy('age','asc')->simplePaginate(5);
+//        モデル利用で順番変更
+//        $items = Person::orderBy('age','asc')->simplePaginate(5);
+        $user = Auth::user();
+        $sort = $request->sort;
+        $items = Person::orderBy($sort,'asc')->Paginate(5);
+        $param = ['items' => $items,'sort' => $sort,'user'=>$user];
 
-        return view('hello.index',['items'=>$items]);
+        return view('hello.index',$param);
 	}
 
 
@@ -106,6 +116,25 @@ class HelloController extends Controller
 //        sessionの保存
         $request->session()->put('msg',$msg);
         return redirect('hello/session');
+    }
+
+    public function getAuth(Request $request)
+    {
+        $param = ['message'=>'ログインしてください'];
+        return view('hello.auth',$param);
+    }
+
+    public function postAuth(Request $request)
+    {
+        $email = $request->email;
+        $password = $request->password;
+        if(Auth::attempt(['email' => $email,
+                'password' => $password])){
+            $msg = 'ログインしました。('. Auth::user()->name . ')';
+        }else{
+            $msg = 'ログインに失敗しました';
+        }
+        return view('hello.auth',['message' => $msg]);
     }
 }
 
